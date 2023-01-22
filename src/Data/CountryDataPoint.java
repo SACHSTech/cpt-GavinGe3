@@ -12,23 +12,26 @@ public class CountryDataPoint {
         addData = 0;
     }
 
-    public void add(String value){
+    public void addValue(String value){
+        
         switch(addData){
             case 0:
-            this.Country = value;
-            break;
+                this.Country = value;
+                break;
             case 1:
-            this.year = Integer.parseInt(value);
-            break;
+                this.year = Integer.parseInt(value);
+                break;
             case 2:
-            this.budget = Double.parseDouble(value);
-            break;
+                this.budget = Double.parseDouble(value);
+                break;
             case 3:
-            this.personnel = Double.parseDouble(value);
-            break;
+                this.personnel = Double.parseDouble(value);
+                break;
             case 4:
-            this.GDP = Double.parseDouble(value);
+                this.GDP = Double.parseDouble(value);
+                break;
         }
+        
         this.addData++;
     }
     public String getCountry() {
