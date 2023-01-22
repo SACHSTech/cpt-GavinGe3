@@ -9,31 +9,35 @@ public class Data {
     List<CountryDataPoint> datalist;
 
 
-    public Data() throws FileNotFoundException {
+    public Data(){
 
-        BufferedReader reader = new BufferedReader(new FileReader("src/Data/RawData.csv"));
-        String newline = null;
-    
-        List<CountryDataPoint> dataList = new ArrayList<CountryDataPoint>();
-
+       
         try {
+
+            BufferedReader reader = new BufferedReader(new FileReader("src/Data/RawData.csv"));
+            String newline;
+        
+            List<CountryDataPoint> dataList = new ArrayList<CountryDataPoint>();
+
             while((newline = reader.readLine()) != null){
                 String[] newStr = newline.split(",");
-            
                 CountryDataPoint datapoint = new CountryDataPoint();
-    
-                for (int i = 0; i < 5; i++) {
-                    datapoint.add(newStr[i]);
-                }
-    
-                datalist.add(datapoint);
                 
+                for (int i = 0; i < 5; i++) {
+                    datapoint.addValue(newStr[i]);
+                    //System.out.println(newStr[i]);
+                }
+                
+                dataList.add(datapoint);
+                
+
             }
-    
-            this.datalist = datalist;
-            
-        } catch (Exception e) {
-            System.out.print("LMAO");
+            System.out.println(dataList.get(11).getCountry());
+            this.datalist = dataList;
+            reader.close();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
             // TODO: handle exception
         }
        
