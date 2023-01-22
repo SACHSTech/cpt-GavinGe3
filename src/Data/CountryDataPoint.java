@@ -37,5 +37,11 @@ public class CountryDataPoint {
     public String getCountry() {
         return this.Country;
     }
+    public Double getGDP(){
+        return this.GDP;
+    }
+    public int getYear(){
+        return this.year;
+    }
 
 }
