@@ -20,6 +20,7 @@ import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -98,14 +99,16 @@ public class ChartGenerator  {
         
 
         barchart.setPrefHeight(600);
-        barchart.setPrefWidth(800);
+        barchart.setPrefWidth(850);
 
-        ChoiceBox<String> dataTypeBar = new ChoiceBox<String>(FXCollections.observableArrayList("Personnel", "GDP", "Military Spending"));
+        ComboBox<String> comboBoxBar = new ComboBox<String>(FXCollections.observableArrayList("Military Personnel", "GDP", "Military Spending"));
+        comboBoxBar.setPromptText("Select Data Category: ");
 
-        addDataSeries(dataTypeBar, barchart, holder, newSeries, barCountryBoxes, 2, yAxis);
+
+        addDataSeries(comboBoxBar, barchart, holder, newSeries, barCountryBoxes, 2, yAxis);
 
         this.barChart.getChildren().addAll(barchart);
-        this.barCheckBoxes.getChildren().add(dataTypeBar);
+        this.barCheckBoxes.getChildren().add(comboBoxBar);
         this.barCheckBoxes.getChildren().addAll(barCountryBoxes);
         this.barScrollPane.setContent(barCheckBoxes);
         this.barChart.getChildren().addAll(barScrollPane);
@@ -121,28 +124,24 @@ public class ChartGenerator  {
         NumberAxis yAxis = new NumberAxis();
         LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
         lineChart.setPrefHeight(600);
-        lineChart.setPrefWidth(800);
+        lineChart.setPrefWidth(850);
 
-        ChoiceBox<String> dataType = new ChoiceBox<String>(FXCollections.observableArrayList("Personnel", "GDP", "Military Spending"));
+        ComboBox<String> comboBoxLine = new ComboBox<String>(FXCollections.observableArrayList("Military Personnel", "GDP", "Military Spending"));
+        comboBoxLine.setPromptText("Select Data Category: ");
 
-        addDataSeries(dataType, lineChart, CurrentSeriesList, holder, countryBoxes, 1, yAxis);
+        addDataSeries(comboBoxLine, lineChart, CurrentSeriesList, holder, countryBoxes, 1, yAxis);
 
         
-        this.chart.getChildren().addAll(lineChart, dataType);
-        this.checkBoxes.getChildren().addAll(dataType);
+        this.chart.getChildren().addAll(lineChart, comboBoxLine);
+        this.checkBoxes.getChildren().addAll(comboBoxLine);
         this.checkBoxes.getChildren().addAll(countryBoxes);
         this.boxPane.setContent(checkBoxes);
         this.chart.getChildren().addAll(boxPane);
 
 
     }
-    public HBox getChart(){
-        return chart;
-    }
-    
-    public HBox getBarChart(){
-        return barChart;
-    }
+
+
     public List<XYChart.Series<String, Number>> stringGDPseries() {
         List<XYChart.Series<String, Number>> stringGDPSeriesList = new ArrayList<>();
         for (int i = 0; i < 31; i++){
@@ -159,6 +158,7 @@ public class ChartGenerator  {
         return stringGDPSeriesList;
     }
 
+
     public List<XYChart.Series<Number, Number>> GDPseries() {
         List<XYChart.Series<Number, Number>> GDPSeriesList = new ArrayList<>();
         for (int i = 0; i < 31; i++){
@@ -174,6 +174,7 @@ public class ChartGenerator  {
         }
         return GDPSeriesList;
     }
+
 
     public List<XYChart.Series<String, Number>> stringPersonnelSeries() {
         List<XYChart.Series<String, Number>> stringPersonnelSeriesList = new ArrayList<>();
@@ -193,6 +194,7 @@ public class ChartGenerator  {
     return stringPersonnelSeriesList;
     }
 
+
     public List<XYChart.Series<Number, Number>> personnelSeries() {
         List<XYChart.Series<Number, Number>> personnelSeriesList = new ArrayList<>();
         
@@ -206,6 +208,7 @@ public class ChartGenerator  {
     }
     return personnelSeriesList;
     }
+
 
     public List<XYChart.Series<String,Number>> stringBudgetSeries(){
         List<XYChart.Series<String, Number>> stringBudgetSeriesList = new ArrayList<>();
@@ -241,13 +244,14 @@ public class ChartGenerator  {
     }
 
 
-    public void addDataSeries(ChoiceBox n, XYChart chart, List<XYChart.Series<Number, Number>> a, List<XYChart.Series<String, Number>> b, List<CheckBox> checkBoxSet, int j, NumberAxis yAxis){
+    public void addDataSeries(ComboBox selector, XYChart chart, 
+    List<XYChart.Series<Number, Number>> a, List<XYChart.Series<String, Number>> b, List<CheckBox> checkBoxSet, int j, NumberAxis yAxis){
         
-        n.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue.equals("Personnel")){
+        selector.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.equals("Military Personnel")){
                 yAxis.setLabel("Personnel in Thousands");
                 
-                chart.setTitle("Personnel of NATO Countries");
+                chart.setTitle("Number of Military Personnel in NATO Countries");
                 chart.getData().clear();
                 a.clear();
                 b.clear();
@@ -265,9 +269,9 @@ public class ChartGenerator  {
             }
 
             else if (newValue.equals("GDP")){
-                yAxis.setLabel("GDP in Millions (USD)");
+                yAxis.setLabel("GDP in Billions (USD)");
 
-                chart.setTitle("GDP of NATO Countries");
+                chart.setTitle("Gross Domestic Product in NATO Countries (USD)");
                 chart.getData().clear();
                 a.clear();
                 b.clear();
@@ -288,8 +292,8 @@ public class ChartGenerator  {
             
             else if (newValue.equals("Military Spending")){
 
-                yAxis.setLabel("Military Budget in Millions(USD)");
-                chart.setTitle("Military Spending of NATO Countries");
+                yAxis.setLabel("Military Budget in Millions (USD)");
+                chart.setTitle("Military Spending of NATO Countries (USD)");
 
                 chart.getData().clear();
                 a.clear();
@@ -333,6 +337,13 @@ public class ChartGenerator  {
             };
             checkBoxSet.get(i).setOnAction(checkBoxEventHandler);
         }
+    }
+    public HBox getChart(){
+        return chart;
+    }
+    
+    public HBox getBarChart(){
+        return barChart;
     }
 }
 
