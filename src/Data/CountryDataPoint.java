@@ -43,5 +43,12 @@ public class CountryDataPoint {
     public int getYear(){
         return this.year;
     }
+    public double getPersonnel(){
+        return this.personnel;
+    }
+    public double getBudget(){
+        return this.budget;
+    }
+
 
 }
