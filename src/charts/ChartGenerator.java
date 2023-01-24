@@ -59,6 +59,7 @@ public class ChartGenerator  {
     private List<CheckBox> barCountryBoxes = new ArrayList<>();
 
 
+
     public ChartGenerator() {
         this.showGDP = true;
         this.showBudget = false;
@@ -76,13 +77,14 @@ public class ChartGenerator  {
             barCountryBoxes.add(checkbox);
         }
         this.boxPane = new ScrollPane();
+        boxPane.setPrefWidth(200);
         this.checkBoxes = new VBox();
         this.barChart = new HBox();
         this.barScrollPane = new ScrollPane();
+        barScrollPane.setPrefWidth(200);
         this.barCheckBoxes = new VBox();
-
-
     }
+    
 
     public void updateBarChart(){
 
@@ -92,17 +94,18 @@ public class ChartGenerator  {
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Years 2014 to 2021");
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Military Budget in Years");
         BarChart<String, Number> barchart = new BarChart<>(xAxis, yAxis);
+        
 
-        barChart.setPrefHeight(600);
-        barChart.setPrefWidth(800);
+        barchart.setPrefHeight(600);
+        barchart.setPrefWidth(800);
 
         ChoiceBox<String> dataTypeBar = new ChoiceBox<String>(FXCollections.observableArrayList("Personnel", "GDP", "Military Spending"));
 
-        addDataSeries(dataTypeBar, barchart, holder, newSeries, barCountryBoxes, 2);
+        addDataSeries(dataTypeBar, barchart, holder, newSeries, barCountryBoxes, 2, yAxis);
 
-        this.barChart.getChildren().addAll(barchart, dataTypeBar);
+        this.barChart.getChildren().addAll(barchart);
+        this.barCheckBoxes.getChildren().add(dataTypeBar);
         this.barCheckBoxes.getChildren().addAll(barCountryBoxes);
         this.barScrollPane.setContent(barCheckBoxes);
         this.barChart.getChildren().addAll(barScrollPane);
@@ -122,10 +125,11 @@ public class ChartGenerator  {
 
         ChoiceBox<String> dataType = new ChoiceBox<String>(FXCollections.observableArrayList("Personnel", "GDP", "Military Spending"));
 
-        addDataSeries(dataType, lineChart, CurrentSeriesList, holder, countryBoxes, 1);
+        addDataSeries(dataType, lineChart, CurrentSeriesList, holder, countryBoxes, 1, yAxis);
 
         
         this.chart.getChildren().addAll(lineChart, dataType);
+        this.checkBoxes.getChildren().addAll(dataType);
         this.checkBoxes.getChildren().addAll(countryBoxes);
         this.boxPane.setContent(checkBoxes);
         this.chart.getChildren().addAll(boxPane);
@@ -154,6 +158,7 @@ public class ChartGenerator  {
         }
         return stringGDPSeriesList;
     }
+
     public List<XYChart.Series<Number, Number>> GDPseries() {
         List<XYChart.Series<Number, Number>> GDPSeriesList = new ArrayList<>();
         for (int i = 0; i < 31; i++){
@@ -169,6 +174,7 @@ public class ChartGenerator  {
         }
         return GDPSeriesList;
     }
+
     public List<XYChart.Series<String, Number>> stringPersonnelSeries() {
         List<XYChart.Series<String, Number>> stringPersonnelSeriesList = new ArrayList<>();
         for (int i = 0; i < 31; i++){
@@ -186,8 +192,6 @@ public class ChartGenerator  {
     }
     return stringPersonnelSeriesList;
     }
-
-
 
     public List<XYChart.Series<Number, Number>> personnelSeries() {
         List<XYChart.Series<Number, Number>> personnelSeriesList = new ArrayList<>();
@@ -237,11 +241,13 @@ public class ChartGenerator  {
     }
 
 
-    public void addDataSeries(ChoiceBox n, XYChart chart, List<XYChart.Series<Number, Number>> a, List<XYChart.Series<String, Number>> b, List<CheckBox> checkBoxSet, int j){
+    public void addDataSeries(ChoiceBox n, XYChart chart, List<XYChart.Series<Number, Number>> a, List<XYChart.Series<String, Number>> b, List<CheckBox> checkBoxSet, int j, NumberAxis yAxis){
         
         n.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.equals("Personnel")){
-                chart.setTitle("Personnel");
+                yAxis.setLabel("Personnel in Thousands");
+                
+                chart.setTitle("Personnel of NATO Countries");
                 chart.getData().clear();
                 a.clear();
                 b.clear();
@@ -259,7 +265,9 @@ public class ChartGenerator  {
             }
 
             else if (newValue.equals("GDP")){
-                chart.setTitle("GDP");
+                yAxis.setLabel("GDP in Millions (USD)");
+
+                chart.setTitle("GDP of NATO Countries");
                 chart.getData().clear();
                 a.clear();
                 b.clear();
@@ -279,8 +287,9 @@ public class ChartGenerator  {
                 }
             
             else if (newValue.equals("Military Spending")){
-                
-                chart.setTitle("Military Spending");
+
+                yAxis.setLabel("Military Budget in Millions(USD)");
+                chart.setTitle("Military Spending of NATO Countries");
 
                 chart.getData().clear();
                 a.clear();
