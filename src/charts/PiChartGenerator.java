@@ -35,6 +35,10 @@ public class PiChartGenerator {
     // Int determining the current year to show
     private int intCurrentDataset;
     
+    /**
+     * Constructor for that intiailizes all variables required for the pichart
+     * 
+     */
     public PiChartGenerator(){
 
         // Create the variables listed above
@@ -50,7 +54,10 @@ public class PiChartGenerator {
         intCurrentDataset = -1;
     }
 
-
+    /**
+     * A method that generates a pichart through the use of three dropdown menus, each allowing the user to filter through the dataset. 
+     * 
+     */
     public void updatePiChart(){
 
         // Create three Dropdown Menus that determine the type of data, the year of the data, and if the data includes the US
@@ -128,12 +135,19 @@ public class PiChartGenerator {
         this.PieChartVBox.getChildren().addAll(this.choiceBoxHBox);
     }
 
-    // Return the chart
+    /**
+     * Return the VBox containing the three choiceboxes and the pichart
+     * @return Vbox PieChartVBox
+     */
     public VBox returnChart(){
         return this.PieChartVBox;
     }
 
-    
+    /**
+     * Adds data to the objects pieChartData list 
+     * @param intWithUs this integer stops the iteration through the dataset at a certain point, which includes or doesn't include the USA
+     */
+
     public void resetData(int intWithUs){
 
         // Create 8 Observable list containing piechart data and add to pieChartData
@@ -141,15 +155,15 @@ public class PiChartGenerator {
             ObservableList<PieChart.Data> newData = FXCollections.observableArrayList();
             this.pieChartData.add(newData);
         }
-        // if showBudget then set the data to budget data
+        // if showBudget then set the data  added to budget data
         if (this.boolShowBudget){
             for (int i = 0; i < 8; i++){
                 for (int x = i; x < this.intWithUs; x=x+1*8){
-                    this.pieChartData.get(i).add(new PieChart.Data(this.scraper.getData().get(x).getCountry(), this.scraper.getData().get(x).getMilitaryBudget()));
+                    this.pieChartData.get(i).add(new PieChart.Data(this.scraper.getData().get(x).getCountry(), this.scraper.getData().get(x).getBudget()));
                 }
             }
         }
-        // if showGDP then set the data to GDP data
+        // if showGDP then set the data added to GDP data
         if (this.boolShowGDP){
             for (int i = 0; i < 8; i++){
                 for (int x = i; x < this.intWithUs; x=x+1*8){
@@ -157,7 +171,7 @@ public class PiChartGenerator {
                 }
             }
         }
-        // if personnel then set the data to Personnel data
+        // if personnel then set the data added to Personnel data
         if (this.boolShowPersonnel){
 
             for (int i = 0; i < 8; i++){
@@ -169,13 +183,17 @@ public class PiChartGenerator {
     }
 
 
+    /**
+     * A method that clears and then resets the pichart using a new dataset 
+     * @param intCurrentDataset An integer denoting the dataset to be used, which is stored in PiChartData
+     */
 
     public void clearAndGetData(int intCurrentDataset){
 
         // When current dataset has been set
         if (this.intCurrentDataset > -1){
 
-            // Clear all data from piChart datalist, and pichart and reform the pichart with new selected dataset
+            // Clear all data from piChart datalist, and pichart and reforms the pichart with new selected dataset
             this.pieChartData.clear();
             
             resetData(this.intWithUs);

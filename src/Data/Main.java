@@ -15,6 +15,9 @@ import charts.PiChartGenerator;
 
 public class Main extends Application{
 
+    /**
+     * A method that sets the stage for the JavaFX application containg a line, bar, and pichart
+     */
     public void start(Stage primaryStage) {
 
         // Create new Table
@@ -72,9 +75,14 @@ public class Main extends Application{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    /**
+     * main Method that runs the JavaFX application
+     * @param args
+     * 
+     */
+    
 
-
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args)  {
 
         launch(args);
 

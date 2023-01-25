@@ -3,53 +3,60 @@ package Data;
 import java.io.*;
 import java.util.*;
 
+
 public class DataScrape {
 
-    // Class contains list of datapoints
+    // Class Variable list of datapoints
     List<CountryDataPoint> datalist;
 
-    public DataScrape() {
+    /**
+     * When initialized this class scrapes data from the CSV File and stores it within an object List containing CountryDataPoints defined in a seperate class
+     */
+    public DataScrape(){
 
         try {
-
-            // New Buffered reader that reads from csv
+            // Create new Buffered reader to read file
             BufferedReader reader = new BufferedReader(new FileReader("src/Data/RawData.csv"));
-
-            // Change all occurences of string
-            String strNewLine;
+            String newline;
+            
+            // Create Temporary list for datapoints
             List<CountryDataPoint> newDataList = new ArrayList<CountryDataPoint>();
 
-            while ((strNewLine = reader.readLine()) != null) {
-
-                // Split each line at comma, add to an array, and create a datapoint
-                String[] newStr = strNewLine.split(",");
+            while((newline = reader.readLine()) != null){
+                // Split lines by comma
+                String[] newStr = newline.split(",");
                 CountryDataPoint datapoint = new CountryDataPoint();
-
-                // Add the values in the array, to the datapoint
+                
+                // Add values to the datapoint
                 for (int i = 0; i < 5; i++) {
                     datapoint.addValue(newStr[i]);
+                    //System.out.println(newStr[i]);
                 }
-
-                // Add datapoint to temporary list
-                datalist.add(datapoint);
+                // Add datapoint to datapoint list
+                newDataList.add(datapoint);
+                
 
             }
-            // Set the master datalist to the temporary list
+            // set object datalist to temporary datalist
             this.datalist = newDataList;
             reader.close();
-        } catch (Exception e) {
+        } 
+
+        catch (Exception e) {
             e.printStackTrace();
-            // TODO: handle exception
         }
-
+       
     }
 
+    /**
+     * returns the list of datapoints
+     * @return datalist
+     */
     public List<CountryDataPoint> getData() {
-        return datalist;
+        // Return datalist
+        return this.datalist;
     }
 
-    public CountryDataPoint getCountry(int i) {
-        return datalist.get(i);
-    }
-
+  
+    
 }

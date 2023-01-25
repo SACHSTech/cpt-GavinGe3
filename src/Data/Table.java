@@ -1,5 +1,6 @@
 package Data;
 
+// import packages
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -16,13 +17,19 @@ public class Table {
     private TableView<CountryDataPoint> newTable;
     private TextField newSearch;
 
+    /**
+     * Constructor for table method
+     * 
+     */
     public Table() {
         newSorter = new Sorter();
         newTable = new TableView<CountryDataPoint>();
         newSearch = new TextField();
-
     }
 
+    /**
+     * A method that defines a Datatable with a searchbar that can be run in Main.
+     */
     public void createTable() {
 
         // Set columns for table based on our datapoints
@@ -45,7 +52,7 @@ public class Table {
         this.newTable.getColumns().addAll(nameColumn, yearColumn, budgetColumn, personnelColumn, GDPColumn);
 
         // Create new observablelist of datapoints using the sorter
-        ObservableList<CountryDataPoint> newData = FXCollections.observableArrayList(this.newSorter.selectionSort());
+        ObservableList<CountryDataPoint> newData = FXCollections.observableArrayList(this.newSorter.sortOnBudget());
 
         // Set items on table to sorted datapoints
         this.newTable.setItems(newData);
