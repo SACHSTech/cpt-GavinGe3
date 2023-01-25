@@ -1,23 +1,20 @@
 package Data;
 
 public class CountryDataPoint {
-
-    // Create Variables for the fields of each datapoint 
     private String Country;
     private int year;
     private double budget;
     private double personnel;
     private double GDP;
-    public int addDataCounter;
+    public int addData;
 
     public CountryDataPoint() {
-        // Create a counter for adding the datapoints
-        addDataCounter = 0;
+        addData = 0;
     }
-    public void addValue(String value){
 
-        // Switchcase that parses the value from the string
-        switch(this.addDataCounter){
+    public void addValue(String value){
+        
+        switch(addData){
             case 0:
                 this.Country = value;
                 break;
@@ -34,10 +31,9 @@ public class CountryDataPoint {
                 this.GDP = Double.parseDouble(value);
                 break;
         }
-        this.addDataCounter++;
+        
+        this.addData++;
     }
-
-   
     public String getCountry() {
         return this.Country;
     }
@@ -50,16 +46,9 @@ public class CountryDataPoint {
     public double getPersonnel(){
         return this.personnel;
     }
-    public double getMilitaryBudget(){
+    public double getBudget(){
         return this.budget;
     }
-    public void setBudget(double newValue){
-        this.budget = newValue;
-    }
-    public void setPersonnel(double newValue){
-         this.personnel = newValue;
-    }
-    public void setGDP(double newValue){
-         this.GDP = newValue;
-    }
+
+
 }
