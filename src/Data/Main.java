@@ -1,20 +1,14 @@
 package Data;
 
 import java.io.FileNotFoundException;
-
-
 import javafx.application.Application;
-
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import charts.BarAndLineChartGenerator;
 import charts.PiChartGenerator;
 
@@ -23,21 +17,29 @@ public class Main extends Application{
 
     public void start(Stage primaryStage) {
 
+        // Create new Table
         Table newTable = new Table();
         newTable.createTable();
 
+        // Create newLine and Bar Chart
         BarAndLineChartGenerator newChart = new BarAndLineChartGenerator();
         newChart.updateLineChart();
         newChart.updateBarChart();
+
+        // Create PiChart
         PiChartGenerator newPiChart = new PiChartGenerator();
         newPiChart.updatePiChart();
         
-        VBox basic = new VBox();
-        VBox newPane = new VBox();
-        newPane.getChildren().add(newTable.searchBar());
-        newPane.getChildren().add(newTable.returnTable());
+        // Create Main Vbox
+        VBox mainVBox = new VBox();
+
+        // Create new VBox for Table
+        VBox newTableVBox = new VBox();
+        newTableVBox.getChildren().add(newTable.searchBar());
+        newTableVBox.getChildren().add(newTable.returnTable());
         
 
+        // Create new tab pane, tabs and set names
         TabPane tabPane = new TabPane();
         Tab tab1 = new Tab();
         tab1.setText("LineChart");
@@ -48,24 +50,25 @@ public class Main extends Application{
         Tab tab3 = new Tab();
         tab3.setText("BarChart");
 
+        // Set content for tabs and add to tab pane
         tab1.setContent(newChart.getChart());
         tab2.setContent(newPiChart.returnChart());
         tab3.setContent(newChart.getBarChart());
         tabPane.getTabs().addAll(tab1,tab2,tab3);
 
-
+        // Create main Chart Label
         Label label = new Label("NATO Military and Economy Statistics");
         label.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;-fx-text-alignment: center;");
 
-        label.setAlignment(Pos.TOP_CENTER);
-        basic.getChildren().add(label);
-        basic.getChildren().add(tabPane);
-        basic.getChildren().add(newPane);
+        // Add title, tabpane, and tableVbox to main VBox
+        mainVBox.getChildren().add(label);
+        mainVBox.getChildren().add(tabPane);
+        mainVBox.getChildren().add(newTableVBox);
 
+        // Set Scene to the mainVBox and set dimensions
+        Scene scene = new Scene(mainVBox, 1075, 900);
 
-      
-        Scene scene = new Scene(basic, 1075, 900);
-
+        // Set primary stage to scene and show to screen
         primaryStage.setScene(scene);
         primaryStage.show();
     }

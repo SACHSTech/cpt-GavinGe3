@@ -145,7 +145,7 @@ public class PiChartGenerator {
         if (this.boolShowBudget){
             for (int i = 0; i < 8; i++){
                 for (int x = i; x < this.intWithUs; x=x+1*8){
-                    this.pieChartData.get(i).add(new PieChart.Data(this.scraper.getData().get(x).getCountry(), this.scraper.getData().get(x).getBudget()));
+                    this.pieChartData.get(i).add(new PieChart.Data(this.scraper.getData().get(x).getCountry(), this.scraper.getData().get(x).getMilitaryBudget()));
                 }
             }
         }

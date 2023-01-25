@@ -2,33 +2,30 @@ package Data;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
 
 public class Table {
 
+    // Create new Sorter
     private Sorter newSorter;
+
+    // Create new Table and Search bar
     private TableView<CountryDataPoint> newTable;
-    private DataScrape newScraper;
     private TextField newSearch;
-    
-    public Table(){
+
+    public Table() {
         newSorter = new Sorter();
         newTable = new TableView<CountryDataPoint>();
-        newScraper = new DataScrape();
         newSearch = new TextField();
 
     }
 
+    public void createTable() {
 
-    public void createTable(){
-
-      
-
+        // Set columns for table based on our datapoints
         TableColumn<CountryDataPoint, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("Country"));
 
@@ -44,41 +41,46 @@ public class Table {
         TableColumn<CountryDataPoint, Double> GDPColumn = new TableColumn<>("GDP (Billions of USD)");
         GDPColumn.setCellValueFactory(new PropertyValueFactory<>("GDP"));
 
-        newTable.getColumns().addAll(nameColumn, yearColumn, budgetColumn, personnelColumn, GDPColumn);
+        // Add Columns to table
+        this.newTable.getColumns().addAll(nameColumn, yearColumn, budgetColumn, personnelColumn, GDPColumn);
 
+        // Create new observablelist of datapoints using the sorter
+        ObservableList<CountryDataPoint> newData = FXCollections.observableArrayList(this.newSorter.selectionSort());
 
-        ObservableList<CountryDataPoint> newData = FXCollections.observableArrayList(newSorter.selectionSort());
+        // Set items on table to sorted datapoints
+        this.newTable.setItems(newData);
 
-        newTable.setItems(newData);
-
+        // Set width of table columns
         yearColumn.setPrefWidth(150);
+        budgetColumn.setPrefWidth(300);
         personnelColumn.setPrefWidth(250);
         GDPColumn.setPrefWidth(250);
 
-        newData.forEach(item ->{
-            item.setBudget(item.getBudget() * 1000000);
-            item.setPersonnel(item.getPersonnel() * 1000);
-            item.setGDP(item.getGDP() * 1000000000);
-        });
+        // Searchbar prompt
+        this.newSearch.setPromptText("Search by Country Name");
 
+        // When a key is released
+        this.newSearch.setOnKeyReleased(e -> {
 
-        newSearch.setPromptText("Search by Country Name");
-        newSearch.setOnKeyReleased(e -> {
-        String searchTerm = newSearch.getText();
-        ObservableList<CountryDataPoint> filteredData = FXCollections.observableArrayList();
-        for (CountryDataPoint data : newData) {
-            if (data.getCountry().toLowerCase().contains(searchTerm.toLowerCase())) {
-            filteredData.add(data);
+            // Store searched term in a string and create new list of datapoints
+            String searchTerm = this.newSearch.getText();
+            ObservableList<CountryDataPoint> filteredData = FXCollections.observableArrayList();
+            for (CountryDataPoint data : newData) {
+                // datapoint matches searched term add to new list of datapoints
+                if (data.getCountry().toLowerCase().contains(searchTerm.toLowerCase())) {
+                    filteredData.add(data);
+                }
             }
-        }
-        newTable.setItems(filteredData);
-    });
+            // Set table to display filtered datapoints
+            this.newTable.setItems(filteredData);
+        });
     }
 
-    public TableView<CountryDataPoint> returnTable(){
+    public TableView<CountryDataPoint> returnTable() {
         return this.newTable;
     }
-    public TextField searchBar(){
-        return newSearch;
+
+    public TextField searchBar() {
+        return this.newSearch;
     }
 }

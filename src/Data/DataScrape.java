@@ -3,45 +3,47 @@ package Data;
 import java.io.*;
 import java.util.*;
 
-
-
 public class DataScrape {
 
+    // Class contains list of datapoints
     List<CountryDataPoint> datalist;
-    
 
-
-    public DataScrape(){
+    public DataScrape() {
 
         try {
-            
-            BufferedReader reader = new BufferedReader(new FileReader("src/Data/RawData.csv"));
-            String newline;
-        
-            List<CountryDataPoint> dataList = new ArrayList<CountryDataPoint>();
 
-            while((newline = reader.readLine()) != null){
-                String[] newStr = newline.split(",");
+            // New Buffered reader that reads from csv
+            BufferedReader reader = new BufferedReader(new FileReader("src/Data/RawData.csv"));
+
+            // Change all occurences of string
+            String strNewLine;
+            List<CountryDataPoint> newDataList = new ArrayList<CountryDataPoint>();
+
+            while ((strNewLine = reader.readLine()) != null) {
+
+                // Split each line at comma, add to an array, and create a datapoint
+                String[] newStr = strNewLine.split(",");
                 CountryDataPoint datapoint = new CountryDataPoint();
-                
+
+                // Add the values in the array, to the datapoint
                 for (int i = 0; i < 5; i++) {
                     datapoint.addValue(newStr[i]);
-                    //System.out.println(newStr[i]);
                 }
-                
-                dataList.add(datapoint);
-                
+
+                // Add datapoint to temporary list
+                datalist.add(datapoint);
 
             }
-            this.datalist = dataList;
+            // Set the master datalist to the temporary list
+            this.datalist = newDataList;
             reader.close();
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             // TODO: handle exception
         }
-       
+
     }
+
     public List<CountryDataPoint> getData() {
         return datalist;
     }
@@ -49,5 +51,5 @@ public class DataScrape {
     public CountryDataPoint getCountry(int i) {
         return datalist.get(i);
     }
-    
+
 }

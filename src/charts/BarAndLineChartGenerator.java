@@ -168,7 +168,7 @@ public class BarAndLineChartGenerator {
                 // Add Military Spending Data if that is selected to series
                 if (selection.equals("Military Spending")){
                     stringData.getData().add(new XYChart.Data<>(
-                        Integer.toString(scraper.getData().get(x).getYear()), scraper.getData().get(x).getBudget()));
+                        Integer.toString(scraper.getData().get(x).getYear()), scraper.getData().get(x).getMilitaryBudget()));
                 }
             }
             // Add all data series to list
@@ -204,7 +204,7 @@ public class BarAndLineChartGenerator {
                 // Add Military Spending Data if that is selected to series
                 if (newValue.equals("Military Spending")){
                     series.getData().add(new XYChart.Data<>(
-                        scraper.getData().get(x).getYear(), scraper.getData().get(x).getBudget()));
+                        scraper.getData().get(x).getYear(), scraper.getData().get(x).getMilitaryBudget()));
                 }
             }
         // Add all data series to list
