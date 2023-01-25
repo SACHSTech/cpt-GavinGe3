@@ -4,16 +4,17 @@ import java.io.*;
 import java.util.*;
 
 
+
 public class DataScrape {
 
     List<CountryDataPoint> datalist;
+    
 
 
     public DataScrape(){
 
-       
         try {
-
+            
             BufferedReader reader = new BufferedReader(new FileReader("src/Data/RawData.csv"));
             String newline;
         

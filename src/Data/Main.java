@@ -1,24 +1,21 @@
 package Data;
 
 import java.io.FileNotFoundException;
-import java.util.List;
+
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import charts.ChartGenerator;
+import charts.BarAndLineChartGenerator;
 import charts.PiChartGenerator;
 
 
@@ -29,7 +26,7 @@ public class Main extends Application{
         Table newTable = new Table();
         newTable.createTable();
 
-        ChartGenerator newChart = new ChartGenerator();
+        BarAndLineChartGenerator newChart = new BarAndLineChartGenerator();
         newChart.updateLineChart();
         newChart.updateBarChart();
         PiChartGenerator newPiChart = new PiChartGenerator();
@@ -67,7 +64,7 @@ public class Main extends Application{
 
 
       
-        Scene scene = new Scene(basic, 1000, 900);
+        Scene scene = new Scene(basic, 1075, 900);
 
         primaryStage.setScene(scene);
         primaryStage.show();
