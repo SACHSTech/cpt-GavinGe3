@@ -1,5 +1,11 @@
 package Data;
 
+/**
+ * A class that defines datapoints which are used in data series to generate various graphs
+ * 
+ * @author G. Ge
+ */
+
 public class CountryDataPoint {
     
     // Initialize Variables Contained within Datapoint
@@ -8,7 +14,7 @@ public class CountryDataPoint {
     private double budget;
     private double personnel;
     private double GDP;
-    public int addData;
+    private int addData;
 
     public CountryDataPoint() {
         addData = 0;

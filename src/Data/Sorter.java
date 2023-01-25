@@ -2,7 +2,11 @@ package Data;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * A class that sorts a list of datapoint objects based on Military Budget
+ * 
+ * @author G. Ge
+ */
 public class Sorter {
     // Class variable datascraper
     private DataScrape scrape;
@@ -21,6 +25,7 @@ public class Sorter {
      * 
      * @return list of CountryDataPoints from low to high based on military budget
      */
+
     public List<CountryDataPoint> sortOnBudget() {
 
         // Create new list

@@ -1,5 +1,11 @@
 package charts;
 
+/**
+ * A class that facilitates the generation of a line and bar chart
+ * 
+ * @author G. Ge
+ */
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -67,8 +73,8 @@ public class BarAndLineChartGenerator {
         // Create and set width for Scrollpanes containing Vbox containing checkboxes
         this.lineScrollPane = new ScrollPane();
         this.barScrollPane = new ScrollPane();
-        lineScrollPane.setPrefWidth(200);
-        barScrollPane.setPrefWidth(200);
+        this.lineScrollPane.setPrefWidth(200);
+        this.barScrollPane.setPrefWidth(200);
 
         // Create Vboxes that contain checkboxes
         this.checkBoxes = new VBox();

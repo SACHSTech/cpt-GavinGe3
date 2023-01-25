@@ -1,5 +1,11 @@
 package charts;
 
+/**
+ * A class that facilitates the generation of a pieChart
+ * 
+ * @author G. Ge
+ */
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;

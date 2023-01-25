@@ -1,5 +1,12 @@
 package Data;
 
+
+/**
+ * A class that facilitates the generation of a table from a list of datapoints, and sorted using the sorter
+ * 
+ * @author G. Ge
+ */
+
 // import packages
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

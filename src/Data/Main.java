@@ -1,5 +1,10 @@
 package Data;
 
+/**
+ * Main class of program. Where objects of classes are initialized to generate the graphs to the screen.
+ * 
+ * @author G. Ge
+ */
 import java.io.FileNotFoundException;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -9,6 +14,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+
 import charts.BarAndLineChartGenerator;
 import charts.PiChartGenerator;
 
@@ -81,9 +88,7 @@ public class Main extends Application{
      * 
      */
     
-
     public static void main(String[] args)  {
-
         launch(args);
 
  

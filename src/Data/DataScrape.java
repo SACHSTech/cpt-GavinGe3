@@ -1,5 +1,11 @@
 package Data;
 
+/**
+ * A class to scrape data from a .csv file adds it to a datapoint, store the datapoints in a list, and return the list
+ * 
+ * @author G. Ge
+ */
+
 import java.io.*;
 import java.util.*;
 
@@ -12,6 +18,7 @@ public class DataScrape {
     /**
      * When initialized this class scrapes data from the CSV File and stores it within an object List containing CountryDataPoints defined in a seperate class
      */
+    
     public DataScrape(){
 
         try {
@@ -28,7 +35,7 @@ public class DataScrape {
                 CountryDataPoint datapoint = new CountryDataPoint();
                 
                 // Add values to the datapoint
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < newStr.length; i++) {
                     datapoint.addValue(newStr[i]);
                     //System.out.println(newStr[i]);
                 }
