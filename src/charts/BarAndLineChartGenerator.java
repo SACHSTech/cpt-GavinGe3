@@ -38,6 +38,11 @@ public class BarAndLineChartGenerator {
     private List<CheckBox> lineCountryBoxes = new ArrayList<>();
     private List<CheckBox> barCountryBoxes = new ArrayList<>();
 
+
+    /**
+     * Constructor for Bar and Line Chart generator, initalize variables 
+     */
+
     public BarAndLineChartGenerator() {
 
         // Create Data Scraper
@@ -70,6 +75,10 @@ public class BarAndLineChartGenerator {
         this.barCheckBoxes = new VBox();
 
     }
+
+    /*
+     * Generates a barchart with checkboxes, and a choicebox using data from CSV file
+     */
 
     public void updateBarChart() {
 
@@ -107,6 +116,11 @@ public class BarAndLineChartGenerator {
 
     }
 
+    /*
+     * Genreates a linechart with a choicebox, and checkboxes using data from CSVfile scraped using scraper
+     * 
+     */
+
     public void updateLineChart() {
 
         // Define New Data Series
@@ -142,6 +156,11 @@ public class BarAndLineChartGenerator {
 
     }
 
+    /**
+     * Returns a list containing data series for the bar/line chart
+     * @param selection a string value that determines the category (military budget, GDP, or Personnel) that is returned
+     * @return A list that contains data series in the form of <String, Number>
+     */
     
     public List<XYChart.Series<String, Number>> stringCurrentSeries(Object selection) {
         
@@ -168,7 +187,7 @@ public class BarAndLineChartGenerator {
                 // Add Military Spending Data if that is selected to series
                 if (selection.equals("Military Spending")){
                     stringData.getData().add(new XYChart.Data<>(
-                        Integer.toString(scraper.getData().get(x).getYear()), scraper.getData().get(x).getMilitaryBudget()));
+                        Integer.toString(scraper.getData().get(x).getYear()), scraper.getData().get(x).getBudget()));
                 }
             }
             // Add all data series to list
@@ -178,7 +197,14 @@ public class BarAndLineChartGenerator {
         return stringSeriesList;
     }
 
-    public List<XYChart.Series<Number, Number>> currentSeries(Object newValue) {
+    /**
+     * Returns a list containing data series for the bar/line chart
+     * @param selection a string value that determines the category (military budget, GDP, or Personnel) that is returned
+     * @return A list that contains data series in the form of <Number, Number> 
+     * 
+     */
+
+    public List<XYChart.Series<Number, Number>> currentSeries(Object selection) {
 
         // Creates arraylist of data series consisting for format Number, Number
         List<XYChart.Series<Number, Number>> seriesList = new ArrayList<>();
@@ -192,19 +218,19 @@ public class BarAndLineChartGenerator {
 
             for (int x = (i * 8); x < ((i + 1) * 8); x++) {
                 // Add Military personnel Data if that is selected to series
-                if (newValue.equals("Military Personnel")){
+                if (selection.equals("Military Personnel")){
                     series.getData().add(new XYChart.Data<>(
                         scraper.getData().get(x).getYear(), scraper.getData().get(x).getPersonnel()));
                 }
                 // Add GDP Data if that is selected to series
-                if (newValue.equals("GDP")){
+                if (selection.equals("GDP")){
                     series.getData().add(new XYChart.Data<>(
                         scraper.getData().get(x).getYear(), scraper.getData().get(x).getGDP()));
                 }
                 // Add Military Spending Data if that is selected to series
-                if (newValue.equals("Military Spending")){
+                if (selection.equals("Military Spending")){
                     series.getData().add(new XYChart.Data<>(
-                        scraper.getData().get(x).getYear(), scraper.getData().get(x).getMilitaryBudget()));
+                        scraper.getData().get(x).getYear(), scraper.getData().get(x).getBudget()));
                 }
             }
         // Add all data series to list
@@ -215,7 +241,17 @@ public class BarAndLineChartGenerator {
 
     }
 
-
+    /**
+     * A method that adds and sets Data to the bar/line chart by adding functions to a dropdown menu and checkboxes
+     * @param selector A dropdown menu selector
+     * @param chart Either a bar or line chart
+     * @param LineDataList A list of data series for a line chart
+     * @param BarDataList A list of data series for a bar chart
+     * @param checkBoxSet A list of different checkboxes each corresponding to a country
+     * @param intCounter A counter that determines if the method is setting the values for a line or bar graph, with 1 being a line, and 2 being a bar
+     * @param yAxis Y-axis for the chart, we will set it's label in this method
+     * 
+     */
     public void addDataSeries(ComboBox selector, XYChart chart,
             List<XYChart.Series<Number, Number>> LineDataList, List<XYChart.Series<String, Number>> BarDataList,
             List<CheckBox> checkBoxSet, int intCounter, NumberAxis yAxis) {
@@ -309,11 +345,17 @@ public class BarAndLineChartGenerator {
             checkBoxSet.get(i).setOnAction(checkBoxEventHandler);
         }
     }
-
+    /**
+     * Returns the HBox containing the lineChart, and dropdownmenu/checkboxes associated with it
+     * @return HBox
+     */
     public HBox getChart() {
         return lineChartBox;
     }
-
+    /**
+     * Returns the HBox containing the lineChart, and dropdownmenu/checkboxes associated with it
+     * @return Hbox
+     */
     public HBox getBarChart() {
         return barChartBox;
     }
