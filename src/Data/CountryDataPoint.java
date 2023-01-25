@@ -11,7 +11,6 @@ public class CountryDataPoint {
     public CountryDataPoint() {
         addData = 0;
     }
-
     public void addValue(String value){
         
         switch(addData){
@@ -31,9 +30,10 @@ public class CountryDataPoint {
                 this.GDP = Double.parseDouble(value);
                 break;
         }
-        
         this.addData++;
     }
+
+   
     public String getCountry() {
         return this.Country;
     }
@@ -49,6 +49,13 @@ public class CountryDataPoint {
     public double getBudget(){
         return this.budget;
     }
-
-
+    public void setBudget(double newValue){
+        this.budget = newValue;
+    }
+    public void setPersonnel(double newValue){
+         this.personnel = newValue;
+    }
+    public void setGDP(double newValue){
+         this.GDP = newValue;
+    }
 }
