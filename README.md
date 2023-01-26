@@ -1,5 +1,14 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=9711293&assignment_repo_type=AssignmentRepo)
-# ICS4U CPT (Edit this)
 
-* Place your project README details here
-* Check the [VS Code, Java, and JavaFX Install and Set Up](https://docs.google.com/document/d/1s5oTmY8A8TDZu303p_DaH6CEAcC9xL8-aNX-pAxCcps/edit?usp=sharing) doc for set up and getting started instructions.
+# ICS4U CPT: NATO Alliance Countries Military and Economy Data
+
+The dataset that I am using is a dataset from NATO, which is a group of 30 countries in a military alliance consisting of countries such as the USA, Canada, and 28 European Countries, which was initially formed to stop the spread of communism in Europe. This dataset includes a variety of military and economic data about these countries between the years 2014 and 2021 - a total of 8 years. From this data, I used 3 specific data types which are Military Personnel, GDP, and Military Spending to create a total of three charts - a PiChart, BarChart, and LineChart. 
+
+I selected this dataset for this project because I find military data like this be interesting - especially how the USA spends more on their military than double of the rest of NATO combined. This data gives you an idea of who the major players within NATO are by displaying how well each country is doing economically, and in terms of their military. This is interesting to me because it gives an idea of the power dynamic of the world, through the display of the power of different NATO countries, which is likely the most powerful military alliance in the world. 
+
+
+
+Link to Data: https://www.nato.int/cps/en/natohq/news_193983.htm
+
+Link to Demo: https://drive.google.com/file/d/16bRqR5QnR9pRwcAUidqtzPVAiEPfovWd/view?usp=sharing
+
+Link to CodeWalkthrough:https://drive.google.com/file/d/1iU0hhYlTVa4WUi9YQlMmNZm93KR27oSY/view?usp=sharing
